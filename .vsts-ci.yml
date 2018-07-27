@@ -1,29 +1,30 @@
 # Sample VSTS CI file
 
-phase:
-    queue: 'Helix'
+phases:
+  - phase: Windows
+    queue:
+      name: Helix
     variables:
       buildConfiguration: 'Release'
 
     steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+      displayName: dotnet restore
 
-      - task: DotNetCoreCLI@2
-        inputs:
-          command: 'restore'
-          projects: '**/*.csproj'
-        displayName: dotnet restore
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+      displayName: dotnet build
 
-      - task: DotNetCoreCLI@2
-        inputs:
-          command: 'build'
-          projects: '**/*.csproj'
-          arguments: '--configuration $(buildConfiguration)'
-        displayName: dotnet build
-
-      - task: DotNetCoreCLI@2
-        inputs:
-          command: 'publish'
-          projects: 'HelloWorld/HelloWorld/HelloWorld.csproj'
-          publishWebProjects: false
-          arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory)'
-        displayName: dotnet publish
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'publish'
+        projects: 'HelloWorld/HelloWorld.csproj'
+        publishWebProjects: false
+        arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory)'
+      displayName: dotnet publish
