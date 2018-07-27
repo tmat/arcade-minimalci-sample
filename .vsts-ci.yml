@@ -36,6 +36,9 @@ phases:
       buildConfiguration: 'Release'
 
     steps:
+    - task: DotNetCoreInstaller@0
+      displayName: Use .NET Core sdk 1.0.4
+
     - task: DotNetCoreCLI@2
       inputs:
         command: 'restore'
