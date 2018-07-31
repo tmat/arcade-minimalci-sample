@@ -27,7 +27,8 @@ phases:
           _BuildConfig: Release
     steps:
     - task: DotNetCoreInstaller@0
-      displayName: Use .NET Core sdk 1.0.4
+      inputs:
+        version: 2.1.302
     - template: eng/build.yml
 
   - phase: Linux
@@ -41,5 +42,6 @@ phases:
           _BuildConfig: Release
     steps:
     - task: DotNetCoreInstaller@0
-      displayName: Use .NET Core sdk 1.0.4
+      inputs:
+        version: 2.1.302
     - template: eng/build.yml
