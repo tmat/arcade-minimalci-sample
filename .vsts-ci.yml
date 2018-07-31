@@ -1,6 +1,7 @@
 # Sample VSTS CI file
 variables:
   Build.Repository.Clean: true
+  targetFramework: 'netcoreapp2.0'
 
 phases:
   - phase: Windows
@@ -28,7 +29,7 @@ phases:
         command: 'publish'
         projects: 'HelloWorld/HelloWorld.csproj'
         publishWebProjects: false
-        arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory)'
+        arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory) --framework $(targetFramework)'
       displayName: dotnet publish
 
   - phase: Linux
@@ -59,5 +60,5 @@ phases:
         command: 'publish'
         projects: 'HelloWorld/HelloWorld.csproj'
         publishWebProjects: false
-        arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory)'
+        arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory) --framework $(targetFramework)'
       displayName: dotnet publish
