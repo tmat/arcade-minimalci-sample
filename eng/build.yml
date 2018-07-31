@@ -6,7 +6,11 @@ steps:
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
+    arguments: '-v diag'
   displayName: dotnet restore
+  env:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+    DOTNET_MULTILEVEL_LOOKUP: 0
 
 - task: DotNetCoreCLI@2
   inputs:
