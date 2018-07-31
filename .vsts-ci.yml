@@ -10,13 +10,11 @@ phases:
       parallel: 2
       matrix:
         debug:
-          buildConfiguration: 'Debug'
+          _BuildConfig: Debug
         release:
-          buildConfiguration: 'Release'
+          _BuildConfig: Release
     steps:
     - template: eng/build.yml
-      parameters:
-        buildConfig: $(buildConfiguration)
 
   - phase: OSX
     queue:
@@ -24,15 +22,13 @@ phases:
       parallel: 2
       matrix:
         debug:
-          buildConfiguration: 'Debug'
+          _BuildConfig: Debug
         release:
-          buildConfiguration: 'Release'
+          _BuildConfig: Release
     steps:
     - task: DotNetCoreInstaller@0
       displayName: Use .NET Core sdk 1.0.4
     - template: eng/build.yml
-      parameters:
-        buildConfig: $(buildConfiguration)
 
   - phase: Linux
     queue:
@@ -40,12 +36,10 @@ phases:
       parallel: 2
       matrix:
         debug:
-          buildConfiguration: 'Debug'
+          _BuildConfig: Debug
         release:
-          buildConfiguration: 'Release'
+          _BuildConfig: Release
     steps:
     - task: DotNetCoreInstaller@0
       displayName: Use .NET Core sdk 1.0.4
     - template: eng/build.yml
-      parameters:
-        buildConfig: $(buildConfiguration)
