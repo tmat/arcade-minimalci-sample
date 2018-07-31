@@ -7,16 +7,24 @@ phases:
   - phase: Windows
     queue:
       name: Helix
-    variables:
-      buildConfiguration: 'Release'
+      parallel: 2 # Limit to four agents at a time
+      matrix:
+        windows_debug:
+          buildConfiguration: 'Debug'
+        windows_release:
+          buildConfiguration: 'Release'
     steps:
     - template: eng/build.yml
 
   - phase: Linux
     queue:
       name: DotNetCore-Linux
-    variables:
-      buildConfiguration: 'Release'
+      parallel: 2
+      matrix:
+        linux_debug:
+          buildConfiguration: 'Debug'
+        linux_release:
+          buildConfiguration: 'Debug'
     steps:
     - task: DotNetCoreInstaller@0
       displayName: Use .NET Core sdk 1.0.4
