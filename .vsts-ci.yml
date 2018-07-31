@@ -1,4 +1,6 @@
 # Sample VSTS CI file
+variables:
+  Build.Repository.Clean: true
 
 phases:
   - phase: Windows
