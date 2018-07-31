@@ -1,7 +1,7 @@
 # Sample VSTS CI file
 variables:
   Build.Repository.Clean: true
-  targetFramework: 'netcoreapp2.0'
+  targetFramework: netcoreapp2.0
 
 phases:
   - phase: Windows
@@ -9,9 +9,9 @@ phases:
       name: Helix
       parallel: 2
       matrix:
-        debug:
+        debug_conf:
           _BuildConfig: Debug
-        release:
+        release_conf:
           _BuildConfig: Release
     steps:
     - template: eng/build.yml
@@ -21,14 +21,11 @@ phases:
       name: 'Hosted macOS Preview'
       parallel: 2
       matrix:
-        debug:
+        debug_conf:
           _BuildConfig: Debug
-        release:
+        release_conf:
           _BuildConfig: Release
     steps:
-    - task: DotNetCoreInstaller@0
-      inputs:
-        version: 2.1.302
     - template: eng/build.yml
 
   - phase: Linux
@@ -36,12 +33,9 @@ phases:
       name: DotNetCore-Linux
       parallel: 2
       matrix:
-        debug:
+        debug_conf:
           _BuildConfig: Debug
-        release:
+        release_conf:
           _BuildConfig: Release
     steps:
-    - task: DotNetCoreInstaller@0
-      inputs:
-        version: 2.1.302
     - template: eng/build.yml
