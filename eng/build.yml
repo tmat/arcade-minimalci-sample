@@ -1,3 +1,6 @@
+parameters:
+  buildConfig: 'Debug'
+
 steps:
 - task: DotNetCoreCLI@2
   inputs:
@@ -9,14 +12,14 @@ steps:
   inputs:
     command: 'build'
     projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfig)'
   displayName: dotnet build
 
-- ${{ if notIn(variables['buildConfiguration'], 'Debug') }}:
+- ${{ if eq(parameters.buildConfig, 'Release') }}:
   - task: DotNetCoreCLI@2
     inputs:
       command: 'publish'
       projects: 'HelloWorld/HelloWorld.csproj'
       publishWebProjects: false
-      arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory) --framework $(targetFramework)'
+      arguments: '--configuration $(buildConfig) --output $(build.artifactStagingDirectory) --framework $(targetFramework)'
     displayName: dotnet publish

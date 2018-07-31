@@ -7,7 +7,7 @@ phases:
   - phase: Windows
     queue:
       name: Helix
-      parallel: 2 # Limit to four agents at a time
+      parallel: 2
       matrix:
         debug:
           buildConfiguration: 'Debug'
@@ -15,11 +15,13 @@ phases:
           buildConfiguration: 'Release'
     steps:
     - template: eng/build.yml
+      parameters:
+        buildConfig: $(buildConfiguration)
 
   - phase: OSX
     queue:
       name: 'Hosted macOS Preview'
-      parallel: 2 # Limit to four agents at a time
+      parallel: 2
       matrix:
         debug:
           buildConfiguration: 'Debug'
@@ -29,6 +31,9 @@ phases:
     - task: DotNetCoreInstaller@0
       displayName: Use .NET Core sdk 1.0.4
     - template: eng/build.yml
+      parameters:
+        buildConfig: $(buildConfiguration)
+
   - phase: Linux
     queue:
       name: DotNetCore-Linux
@@ -42,3 +47,5 @@ phases:
     - task: DotNetCoreInstaller@0
       displayName: Use .NET Core sdk 1.0.4
     - template: eng/build.yml
+      parameters:
+        buildConfig: $(buildConfiguration)
