@@ -12,10 +12,11 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
   displayName: dotnet build
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    projects: 'HelloWorld/HelloWorld.csproj'
-    publishWebProjects: false
-    arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory) --framework $(targetFramework)'
-  displayName: dotnet publish
+- ${{ if notIn(variables['buildConfiguration'], 'Debug') }}:
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'publish'
+      projects: 'HelloWorld/HelloWorld.csproj'
+      publishWebProjects: false
+      arguments: '--configuration $(buildConfiguration) --output $(build.artifactStagingDirectory) --framework $(targetFramework)'
+    displayName: dotnet publish
