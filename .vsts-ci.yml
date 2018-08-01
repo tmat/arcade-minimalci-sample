@@ -12,7 +12,7 @@ phases:
       matrix:
         debug_conf:
           _BuildConfig: Debug
-        ${{ if notIn(variables['Build.Reason'], 'PullRequest') }}:
+        ${{ if notIn(variables['Build.Reason'], 'PullRequest', 'Manual') }}:
           release_conf:
             _BuildConfig: Release
     steps:
@@ -25,7 +25,7 @@ phases:
       matrix:
         debug_conf:
           _BuildConfig: Debug
-        ${{ if notIn(variables['Build.Reason'], 'PullRequest') }}:
+        ${{ if notIn(variables['Build.Reason'], 'PullRequest', 'Manual') }}:
           release_conf:
             _BuildConfig: Release
     steps:
@@ -38,7 +38,7 @@ phases:
       matrix:
         debug_conf:
           _BuildConfig: Debug
-        ${{ if notIn(variables['Build.Reason'], 'PullRequest') }}:
+        ${{ if notIn(variables['Build.Reason'], 'PullRequest', 'Manual') }}:
           release_conf:
             _BuildConfig: Release
     steps:
