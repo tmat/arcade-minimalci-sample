@@ -1,6 +1,6 @@
 # Arcade Minimal CI Sample
 
-[![Build status](https://dotnet.visualstudio.com/7ea9116e-9fac-403d-b258-b31fcf1bb293/_apis/build/status/105?branchName=master)](https://dotnet.visualstudio.com/7ea9116e-9fac-403d-b258-b31fcf1bb293/_build/latest?definitionId=105&branch=master)
+ [![Build status](https://dotnet.visualstudio.com/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_apis/build/status/116?branchName=master)](https://dotnet.visualstudio.com/public/_build/latest?definitionId=116&branch=master)
 
 This repository serves as an example of how to link GitHub repositories to VSTS for CI and PR builds.
 
