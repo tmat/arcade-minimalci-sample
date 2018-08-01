@@ -3,6 +3,7 @@ variables:
   Build.Repository.Clean: true
   targetFramework: netcoreapp2.0
 
+# Three phases for each of the three OSes we want to run on
 phases:
   - phase: Windows
     queue:
@@ -11,8 +12,9 @@ phases:
       matrix:
         debug_conf:
           _BuildConfig: Debug
-        release_conf:
-          _BuildConfig: Release
+        ${{ if notIn(variables['Build.Reason'], 'PullRequest') }}:
+          release_conf:
+            _BuildConfig: Release
     steps:
     - template: eng/build.yml
 
@@ -23,8 +25,9 @@ phases:
       matrix:
         debug_conf:
           _BuildConfig: Debug
-        release_conf:
-          _BuildConfig: Release
+        ${{ if notIn(variables['Build.Reason'], 'PullRequest') }}:
+          release_conf:
+            _BuildConfig: Release
     steps:
     - template: eng/build.yml
 
@@ -35,7 +38,8 @@ phases:
       matrix:
         debug_conf:
           _BuildConfig: Debug
-        release_conf:
-          _BuildConfig: Release
+        ${{ if notIn(variables['Build.Reason'], 'PullRequest') }}:
+          release_conf:
+            _BuildConfig: Release
     steps:
     - template: eng/build.yml
