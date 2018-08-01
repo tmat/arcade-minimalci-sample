@@ -2,6 +2,7 @@
 variables:
   Build.Repository.Clean: true
   targetFramework: netcoreapp2.0
+  yamlDoThePublish: YesPlease
 
 # Three phases for each of the three OSes we want to run on
 phases:
@@ -16,7 +17,21 @@ phases:
           release_conf:
             _BuildConfig: Release
     steps:
+    - powershell: |
+        echo $env:BuildConfig
+        echo $env:YamlDoThePublish
+      env:
+        BuildConfig: $(_BuildConfig)
+        YamlDoThePublish: $(yamlDoThePublish)
     - template: eng/build.yml
+    - ${{ if eq(variables['yamlDoThePublish'], 'YesPlease') }}:
+      - task: DotNetCoreCLI@2
+        inputs:
+          command: 'publish'
+          projects: 'HelloWorld/HelloWorld.csproj'
+          publishWebProjects: false
+          arguments: '--configuration $(_BuildConfig) --output $(build.artifactStagingDirectory) --framework $(targetFramework)'
+        displayName: dotnet publish
 
   - phase: OSX
     queue:
