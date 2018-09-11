@@ -33,6 +33,22 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: custom
+        projects: HelloTests\helixpublish.proj
+        custom: msbuild
+        arguments: '/t:test /p:HelixTargetQueue=Windows.10.Amd64.Open'
+      displayName: Send tests job to Helix
+      env:
+        HelixAccessToken: $(HelixTestAccessToken)
+      condition: eq(variables['_HelixBuildConfig'], 'Debug')
+    - script: powershell .\eng\helix-wait.ps1
+      displayName: Wait for test completion
+      timeoutInMinutes: 60
+      env:
+        HelixAccessToken: $(HelixTestAccessToken)
+      condition: eq(variables['_HelixBuildConfig'], 'Debug')
     variables:
       _HelixBuildConfig: $(_BuildConfig)
 
@@ -56,6 +72,22 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: custom
+        projects: HelloTests\helixpublish.proj
+        custom: msbuild
+        arguments: '/t:test /p:HelixTargetQueue=OSX.1013.amd64-x64'
+      displayName: Send tests job to Helix
+      env:
+        HelixAccessToken: $(HelixTestAccessToken)
+      condition: eq(variables['_HelixBuildConfig'], 'Debug')
+    - script: powershell .\eng\helix-wait.ps1
+      displayName: Wait for test completion
+      timeoutInMinutes: 60
+      env:
+        HelixAccessToken: $(HelixTestAccessToken)
+      condition: eq(variables['_HelixBuildConfig'], 'Debug')
     variables:
       _HelixBuildConfig: $(_BuildConfig)
 
@@ -79,6 +111,22 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: custom
+        projects: HelloTests\helixpublish.proj
+        custom: msbuild
+        arguments: '/t:test /p:HelixTargetQueue=ubuntu.1404.amd64-x64'
+      displayName: Send tests job to Helix
+      env:
+        HelixAccessToken: $(HelixTestAccessToken)
+      condition: eq(variables['_HelixBuildConfig'], 'Debug')
+    - script: powershell .\eng\helix-wait.ps1
+      displayName: Wait for test completion
+      timeoutInMinutes: 60
+      env:
+        HelixAccessToken: $(HelixTestAccessToken)
+      condition: eq(variables['_HelixBuildConfig'], 'Debug')
     variables:
       _HelixBuildConfig: $(_BuildConfig)
       # Run build in docker container

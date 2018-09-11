@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.DotNet.Helix.Sdk">
+  <PropertyGroup>
+    <HelixSource>pr/coreclr/master</HelixSource>
+    <HelixType>test/stuff</HelixType>
+    <HelixBuild>$(BUILD_BUILDNUMBER)</HelixBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <HelixWorkItem Include="baseservices.compilerservices.XUnitWrapper">
+      <Command>dotnet test</Command>
+      <PayloadDirectory>$(BUILD_SOURCESDIRECTORY)\HelloTests</PayloadDirectory>
+      <Timeout>00:30:00</Timeout>
+    </HelixWorkItem>
+  </ItemGroup>
+
+  <Target Name="CorrelationId" AfterTargets="Test">
+    <Message Importance="High" Text="##vso[task.setvariable variable=HelixJobId;]$(HelixJobId)" />
+    <Message Importance="High" Text="##vso[task.setvariable variable=NumberOfWorkItems;]@(HelixWorkItem->Count())" />
+  </Target>
+</Project>
