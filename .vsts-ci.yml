@@ -82,7 +82,7 @@ phases:
       env:
         HelixAccessToken: $(HelixTestAccessToken)
       condition: eq(variables['_HelixBuildConfig'], 'Debug')
-    - script: powershell .\eng\helix-wait.ps1
+    - script: powershell ./eng/helix-wait.sh
       displayName: Wait for test completion
       timeoutInMinutes: 60
       env:
@@ -105,6 +105,9 @@ phases:
         release_configuration:
           _BuildConfig: Release
     steps:
+    - task: DotNetCoreInstaller@0
+      inputs:
+        version: 2.1.401
     - script: eng/common/cibuild.sh
         --configuration $(_BuildConfig)
         --prepareMachine
@@ -121,7 +124,7 @@ phases:
       env:
         HelixAccessToken: $(HelixTestAccessToken)
       condition: eq(variables['_HelixBuildConfig'], 'Debug')
-    - script: powershell .\eng\helix-wait.ps1
+    - script: powershell ./eng/helix-wait.sh
       displayName: Wait for test completion
       timeoutInMinutes: 60
       env:
