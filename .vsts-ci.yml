@@ -75,7 +75,7 @@ phases:
     - task: DotNetCoreCLI@2
       inputs:
         command: custom
-        projects: HelloTests\helixpublish.proj
+        projects: HelloTests/helixpublish.proj
         custom: msbuild
         arguments: '/t:test /p:HelixTargetQueue=OSX.1013.amd64-x64'
       displayName: Send tests job to Helix
@@ -114,7 +114,7 @@ phases:
     - task: DotNetCoreCLI@2
       inputs:
         command: custom
-        projects: HelloTests\helixpublish.proj
+        projects: HelloTests/helixpublish.proj
         custom: msbuild
         arguments: '/t:test /p:HelixTargetQueue=ubuntu.1404.amd64-x64'
       displayName: Send tests job to Helix
