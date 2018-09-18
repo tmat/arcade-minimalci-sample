@@ -38,10 +38,11 @@ phases:
         command: custom
         projects: HelloTests\helixpublish.proj
         custom: msbuild
-        arguments: '/t:test /p:HelixTargetQueues=Windows.10.Amd64.Open%3BWindows.7.Amd64.Open%3Bwindows.10.arm64.open%3BWindows.81.Amd64.Open'
+        arguments: '/t:test'
       displayName: Send tests job to Helix
       env:
         HelixAccessToken: $(HelixTestAccessToken)
+        HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open;Windows.81.Amd64.Open
       condition: eq(variables['_HelixBuildConfig'], 'Debug')
     - script: powershell .\eng\helix-wait.ps1
       displayName: Wait for test completion
@@ -77,10 +78,11 @@ phases:
         command: custom
         projects: HelloTests/helixpublish.proj
         custom: msbuild
-        arguments: '/t:test /p:HelixTargetQueues=OSX.1013.amd64.Open%3BOSX.1012.amd64.Open'
+        arguments: '/t:test'
       displayName: Send tests job to Helix
       env:
         HelixAccessToken: $(HelixTestAccessToken)
+        HelixTargetQueues: OSX.1013.amd64.Open;OSX.1012.amd64.Open
       condition: eq(variables['_HelixBuildConfig'], 'Debug')
     - script: chmod +x eng/helix-wait.sh; ./eng/helix-wait.sh
       displayName: Wait for test completion
@@ -119,10 +121,11 @@ phases:
         command: custom
         projects: HelloTests/helixpublish.proj
         custom: msbuild
-        arguments: '/t:test /p:HelixTargetQueues=ubuntu.1404.amd64.open%3Bcentos.74.amd64.open%3BRedHat.74.Amd64.Open'
+        arguments: '/t:test'
       displayName: Send tests job to Helix
       env:
         HelixAccessToken: $(HelixTestAccessToken)
+        HelixTargetQueues: ubuntu.1404.amd64.open;centos.74.amd64.open;RedHat.74.Amd64.Open
       condition: eq(variables['_HelixBuildConfig'], 'Debug')
     - script: chmod +x eng/helix-wait.sh; ./eng/helix-wait.sh
       displayName: Wait for test completion
