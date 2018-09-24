@@ -1,8 +1,6 @@
 variables:
   Build.Repository.Clean: true
   targetFramework: netcoreapp2.0
-  _HelixType: build/product
-  _HelixSource: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
 
 trigger:
 - master
@@ -33,22 +31,15 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: custom
-        projects: HelloTests\helixpublish.proj
-        custom: msbuild
-        arguments: '/t:test'
-      displayName: Send tests job to Helix
-      env:
-        HelixAccessToken: $(HelixTestAccessToken)
-        HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open;Windows.81.Amd64.Open
-      condition: eq(variables['_HelixBuildConfig'], 'Debug')
-    - script: powershell .\eng\helix-wait.ps1
-      displayName: Wait for test completion
-      timeoutInMinutes: 60
-      env:
-        HelixAccessToken: $(HelixTestAccessToken)
+    - template: eng/common/templates/steps/helix-publish.yml
+      parameters:
+        HelixSource: build/product
+        HelixType: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
+        HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open
+        HelixAcessToken: $(HelixTestAccessToken)
+        WorkItemDirectory: HelloTests
+        WorkItemCommand: dotnet test
+        EnableXUnitReporter: true
       condition: eq(variables['_HelixBuildConfig'], 'Debug')
     variables:
       _HelixBuildConfig: $(_BuildConfig)
@@ -73,22 +64,15 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: custom
-        projects: HelloTests/helixpublish.proj
-        custom: msbuild
-        arguments: '/t:test'
-      displayName: Send tests job to Helix
-      env:
-        HelixAccessToken: $(HelixTestAccessToken)
-        HelixTargetQueues: OSX.1013.amd64.Open;OSX.1012.amd64.Open
-      condition: eq(variables['_HelixBuildConfig'], 'Debug')
-    - script: chmod +x eng/helix-wait.sh; ./eng/helix-wait.sh
-      displayName: Wait for test completion
-      timeoutInMinutes: 60
-      env:
-        HelixAccessToken: $(HelixTestAccessToken)
+    - template: eng/common/templates/steps/helix-publish.yml
+      parameters:
+        HelixSource: build/product
+        HelixType: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
+        HelixTargetQueues: OSX.1012.Amd64
+        HelixAcessToken: $(HelixTestAccessToken)
+        WorkItemDirectory: HelloTests
+        WorkItemCommand: dotnet test
+        EnableXUnitReporter: true
       condition: eq(variables['_HelixBuildConfig'], 'Debug')
     variables:
       _HelixBuildConfig: $(_BuildConfig)
@@ -116,22 +100,15 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: custom
-        projects: HelloTests/helixpublish.proj
-        custom: msbuild
-        arguments: '/t:test'
-      displayName: Send tests job to Helix
-      env:
-        HelixAccessToken: $(HelixTestAccessToken)
-        HelixTargetQueues: ubuntu.1404.amd64.open;centos.74.amd64.open;RedHat.74.Amd64.Open
-      condition: eq(variables['_HelixBuildConfig'], 'Debug')
-    - script: chmod +x eng/helix-wait.sh; ./eng/helix-wait.sh
-      displayName: Wait for test completion
-      timeoutInMinutes: 60
-      env:
-        HelixAccessToken: $(HelixTestAccessToken)
+    - template: eng/common/templates/steps/helix-publish.yml
+      parameters:
+        HelixSource: build/product
+        HelixType: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
+        HelixTargetQueues: Ubuntu.1710.amd64.Open
+        HelixAcessToken: $(HelixTestAccessToken)
+        WorkItemDirectory: HelloTests
+        WorkItemCommand: dotnet test
+        EnableXUnitReporter: true
       condition: eq(variables['_HelixBuildConfig'], 'Debug')
     variables:
       _HelixBuildConfig: $(_BuildConfig)
