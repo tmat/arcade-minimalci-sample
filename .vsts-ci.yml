@@ -104,7 +104,7 @@ phases:
       parameters:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixType)
-        HelixTargetQueues: Ubuntu.1710.amd64.Open
+        HelixTargetQueues: Debian.9.Amd64.Open;Fedora.27.Amd64.Open;RedHat.74.Amd64.Open;Ubuntu.1604.Amd64.Open
         HelixAccessToken: $(HelixTestAccessToken)
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
         WorkItemCommand: dotnet test
