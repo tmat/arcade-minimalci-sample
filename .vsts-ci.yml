@@ -41,7 +41,7 @@ phases:
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: .\.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: "%HELIX_CORRELATION_PAYLOAD% dotnet xunit"
+        WorkItemCommand: "%HELIX_CORRELATION_PAYLOAD%\\dotnet xunit"
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
     variables:
@@ -75,7 +75,7 @@ phases:
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: ./.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: $HELIX_CORRELATION_PAYLOAD dotnet xunit
+        WorkItemCommand: $HELIX_CORRELATION_PAYLOAD/dotnet xunit
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
     variables:
@@ -112,7 +112,7 @@ phases:
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: ./.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: $HELIX_CORRELATION_PAYLOAD dotnet xunit
+        WorkItemCommand: $HELIX_CORRELATION_PAYLOAD/dotnet xunit
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
     variables:
