@@ -11,6 +11,7 @@ parameters:
   CorrelationPayloadDirectory: ''
   EnableXUnitReporter: false
   WaitForWorkItemCompletion: true
+  Condition: 'always()'
 
 steps:
   - task: DotNetCoreCLI@2
@@ -33,3 +34,4 @@ steps:
       CorrelationPayloadDirectory: ${{ parameters.CorrelationPayloadDirectory }}
       WorkItemDirectory: ${{ parameters.WorkItemDirectory }}
       WorkItemCommand: ${{ parameters.WorkItemCommand }}
+    condition: ${{ parameters.Condition }}
