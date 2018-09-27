@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.DotNet.Helix.Sdk">
 
   <ItemGroup>
-    <HelixCorrelationPayload Include="CorrelationPayload">
-      <PayloadDirectory>$(CorrelationPayloadDirectory)</PayloadDirectory>
+    <HelixCorrelationPayload Include="$(CorrelationPayload)">
+      <PayloadDirectory>%(Identity)</PayloadDirectory>
     </HelixCorrelationPayload>
   </ItemGroup>
 
