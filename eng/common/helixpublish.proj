@@ -1,6 +1,12 @@
 <Project Sdk="Microsoft.DotNet.Helix.Sdk">
 
   <ItemGroup>
+    <HelixCorrelationPayload Include="CorrelationPayload">
+      <PayloadDirectory>$(CorrelationPayloadDirectory)</PayloadDirectory>
+    </HelixCorrelationPayload>
+  </ItemGroup>
+
+  <ItemGroup>
     <HelixWorkItem Include="WorkItem">
       <PayloadDirectory>$(WorkItemDirectory)</PayloadDirectory>
       <Command>$(WorkItemCommand)</Command>

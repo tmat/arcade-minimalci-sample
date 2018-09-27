@@ -33,15 +33,17 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - template: /eng/common/templates/steps/helix-publish.yml
-      parameters:
-        HelixSource: $(_HelixSource)
-        HelixType: $(_HelixType)
-        HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open
-        HelixAccessToken: $(HelixTestAccessToken)
-        WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: dotnet test
-        EnableXUnitReporter: true
+    ${{ if eq(variables['_BuildConfig'], 'Debug') }}:
+      - template: /eng/common/templates/steps/helix-publish.yml
+        parameters:
+          HelixSource: $(_HelixSource)
+          HelixType: $(_HelixType)
+          HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open
+          HelixAccessToken: $(HelixTestAccessToken)
+          CorrelationPayloadDirectory: .\.dotnet
+          WorkItemDirectory: $(Build.SourcesDirectory)/artifacts/bin/Debug/netcoreapp2.0
+          WorkItemCommand: "%HELIX_CORRELATION_PAYLOAD% dotnet test"
+          EnableXUnitReporter: true
     variables:
       _HelixBuildConfig: $(_BuildConfig)
 
@@ -65,15 +67,17 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - template: /eng/common/templates/steps/helix-publish.yml
-      parameters:
-        HelixSource: $(_HelixSource)
-        HelixType: $(_HelixType)
-        HelixTargetQueues: OSX.1012.Amd64
-        HelixAccessToken: $(HelixTestAccessToken)
-        WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: dotnet test
-        EnableXUnitReporter: true
+    ${{ if eq(variables['_BuildConfig'], 'Debug') }}:
+      - template: /eng/common/templates/steps/helix-publish.yml
+        parameters:
+          HelixSource: $(_HelixSource)
+          HelixType: $(_HelixType)
+          HelixTargetQueues: OSX.1012.Amd64
+          HelixAccessToken: $(HelixTestAccessToken)
+          CorrelationPayloadDirectory: ./.dotnet
+          WorkItemDirectory: $(Build.SourcesDirectory)/artifacts/bin/Debug/netcoreapp2.0
+          WorkItemCommand: $HELIX_CORRELATION_PAYLOAD dotnet test
+          EnableXUnitReporter: true
     variables:
       _HelixBuildConfig: $(_BuildConfig)
 
@@ -100,15 +104,17 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - template: /eng/common/templates/steps/helix-publish.yml
-      parameters:
-        HelixSource: $(_HelixSource)
-        HelixType: $(_HelixType)
-        HelixTargetQueues: Debian.9.Amd64.Open;Fedora.27.Amd64.Open;RedHat.74.Amd64.Open;Ubuntu.1604.Amd64.Open
-        HelixAccessToken: $(HelixTestAccessToken)
-        WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: dotnet test
-        EnableXUnitReporter: true
+    ${{ if eq(variables['_BuildConfig'], 'Debug') }}:
+      - template: /eng/common/templates/steps/helix-publish.yml
+        parameters:
+          HelixSource: $(_HelixSource)
+          HelixType: $(_HelixType)
+          HelixTargetQueues: Debian.9.Amd64.Open;Fedora.27.Amd64.Open;RedHat.74.Amd64.Open;Ubuntu.1604.Amd64.Open
+          HelixAccessToken: $(HelixTestAccessToken)
+          CorrelationPayloadDirectory: ./.dotnet
+          WorkItemDirectory: $(Build.SourcesDirectory)/artifacts/bin/Debug/netcoreapp2.0
+          WorkItemCommand: $HELIX_CORRELATION_PAYLOAD dotnet test
+          EnableXUnitReporter: true
     variables:
       _HelixBuildConfig: $(_BuildConfig)
       # Run build in docker container

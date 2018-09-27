@@ -8,6 +8,7 @@ parameters:
   HelixPostCommands: ''
   WorkItemDirectory: ''
   WorkItemCommand: ''
+  CorrelationPayloadDirectory: ''
   EnableXUnitReporter: false
   WaitForWorkItemCompletion: true
 
@@ -29,5 +30,6 @@ steps:
       HelixPostCommands: ${{ parameters.HelixPostCommands }}
       EnableXUnitReporter: ${{ parameters.EnableXUnitReporter }}
       WaitForWorkItemCompletion: ${{ parameters.WaitForWorkItemCompletion }}
+      CorrelationPayloadDirectory: ${{ parameters.CorrelationPayloadDirectory }}
       WorkItemDirectory: ${{ parameters.WorkItemDirectory }}
       WorkItemCommand: ${{ parameters.WorkItemCommand }}
