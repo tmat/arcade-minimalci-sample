@@ -3,6 +3,7 @@ variables:
   targetFramework: netcoreapp2.0
   _HelixType: build/product
   _HelixSource: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
+  _BuildConfig: ''
 
 trigger:
 - master
