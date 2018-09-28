@@ -36,10 +36,10 @@ phases:
     - template: /eng/common/templates/steps/helix-publish.yml
       parameters:
         HelixSource: $(_HelixSource)
-        HelixType: $(_HelixType)
+        HelixType: test/product
         HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open
         HelixAccessToken: $(HelixTestAccessToken)
-        CorrelationPayloadDirectory: .dotnet
+        CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
         WorkItemCommand: "%HELIX_CORRELATION_PAYLOAD%\\dotnet xunit"
         EnableXUnitReporter: true
@@ -73,7 +73,7 @@ phases:
         HelixType: $(_HelixType)
         HelixTargetQueues: OSX.1012.Amd64
         HelixAccessToken: $(HelixTestAccessToken)
-        CorrelationPayloadDirectory: .dotnet
+        CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
         WorkItemCommand: $HELIX_CORRELATION_PAYLOAD/dotnet xunit
         EnableXUnitReporter: true
@@ -110,7 +110,7 @@ phases:
         HelixType: $(_HelixType)
         HelixTargetQueues: Debian.9.Amd64.Open;Fedora.27.Amd64.Open;RedHat.74.Amd64.Open;Ubuntu.1604.Amd64.Open
         HelixAccessToken: $(HelixTestAccessToken)
-        CorrelationPayloadDirectory: .dotnet
+        CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
         WorkItemCommand: $HELIX_CORRELATION_PAYLOAD/dotnet xunit
         EnableXUnitReporter: true
