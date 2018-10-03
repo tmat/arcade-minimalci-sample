@@ -3,6 +3,7 @@ variables:
   targetFramework: netcoreapp2.0
   _HelixType: build/product
   _HelixSource: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
+  _HelixTestType: test/product
 
 trigger:
 - master
@@ -36,7 +37,7 @@ phases:
     - template: /eng/common/templates/steps/helix-publish.yml
       parameters:
         HelixSource: $(_HelixSource)
-        HelixType: test/product
+        HelixType: $(_HelixTestType)
         HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
@@ -70,7 +71,7 @@ phases:
     - template: /eng/common/templates/steps/helix-publish.yml
       parameters:
         HelixSource: $(_HelixSource)
-        HelixType: $(_HelixType)
+        HelixType: $(_HelixTestType)
         HelixTargetQueues: OSX.1012.Amd64
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
@@ -107,7 +108,7 @@ phases:
     - template: /eng/common/templates/steps/helix-publish.yml
       parameters:
         HelixSource: $(_HelixSource)
-        HelixType: $(_HelixType)
+        HelixType: $(_HelixTestType)
         HelixTargetQueues: Debian.9.Amd64.Open;Fedora.27.Amd64.Open;RedHat.74.Amd64.Open;Ubuntu.1604.Amd64.Open
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
