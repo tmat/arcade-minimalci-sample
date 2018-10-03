@@ -19,7 +19,7 @@ phases:
     name: Windows_NT
     enableTelemetry: true
     queue:
-      name: Helix
+      name: dotnet-external-temp
       parallel: 99
       matrix:
         debug_configuration:
@@ -41,7 +41,7 @@ phases:
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: cd HelloTests & "%HELIX_CORRELATION_PAYLOAD%\\dotnet xunit"
+        WorkItemCommand: cd %HELIX_WORKITEM_ROOT%\\HelloTests & "%HELIX_CORRELATION_PAYLOAD%\\dotnet xunit"
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
     variables:
@@ -75,7 +75,7 @@ phases:
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: cd HelloTests; $HELIX_CORRELATION_PAYLOAD/dotnet xunit
+        WorkItemCommand: cd $HELIX_WORKITEM_ROOT/HelloTests; $HELIX_CORRELATION_PAYLOAD/dotnet xunit
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
     variables:
@@ -87,7 +87,7 @@ phases:
     name: Linux
     enableTelemetry: true
     queue:
-      name: DotNetCore-Linux
+      name: dnceng-linux-external-temp
       parallel: 99
       matrix:
         debug_configuration:
@@ -112,7 +112,7 @@ phases:
         HelixAccessToken: $(HelixTestAccessToken)
         CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
         WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: cd HelloTests; $HELIX_CORRELATION_PAYLOAD/dotnet xunit
+        WorkItemCommand: cd $HELIX_WORKITEM_ROOT/HelloTests; $HELIX_CORRELATION_PAYLOAD/dotnet xunit
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
     variables:
