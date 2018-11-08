@@ -10,6 +10,7 @@ resources:
 
 trigger:
 - master
+- switch-to-test-pool
 
 # To be added in the future when VSTS supports this feature
 # pr:
@@ -21,14 +22,15 @@ phases:
   parameters:
     name: Windows_NT
     enableTelemetry: true
-    queue:
-      name: dotnet-external-temp
-      parallel: 99
+    strategy:
       matrix:
         debug_configuration:
           _BuildConfig: Debug
         release_configuration:
           _BuildConfig: Release
+    pool:
+      name: NetCorePublic-Int-Pool
+      queue: Windows.10.Amd64.Open
     steps:
     - script: eng\common\cibuild.cmd
         -configuration $(_BuildConfig)
@@ -51,14 +53,15 @@ phases:
   parameters:
     name: OSX
     enableTelemetry: true
-    queue:
-      name: Hosted macOS Preview
-      parallel: 99
+    strategy:
       matrix:
         debug_configuration:
           _BuildConfig: Debug
         release_configuration:
           _BuildConfig: Release
+    pool:
+      name: NetCorePublic-Int-Pool
+      queue: OSX.1012.Amd64.Open
     steps:
     - script: eng/common/cibuild.sh
         --configuration $(_BuildConfig)
@@ -81,15 +84,16 @@ phases:
   parameters:
     name: Linux
     enableTelemetry: true
-    queue:
-      name: Hosted Ubuntu 1604
-      parallel: 99
-      container: LinuxContainer
+    strategy:
       matrix:
         debug_configuration:
           _BuildConfig: Debug
         release_configuration:
           _BuildConfig: Release
+    container: LinuxContainer
+    pool:
+      name: NetCorePublic-Int-Pool
+      queue: Ubuntu.1604.Amd64.Open
     steps:
     - script: eng/common/cibuild.sh
         --configuration $(_BuildConfig)
