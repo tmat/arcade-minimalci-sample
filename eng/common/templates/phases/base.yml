@@ -41,7 +41,11 @@ jobs:
   ${{ if ne(parameters.strategy, '') }}:
     strategy:
       ${{ insert }}: ${{ parameters.strategy }}
-    
+  
+  ${{ if ne(parameters.container, '') }}:
+    pool:
+      ${{ insert }}: ${{ parameters.container }}
+
   ${{ if ne(parameters.pool, '') }}:
     pool:
       ${{ insert }}: ${{ parameters.pool }}
