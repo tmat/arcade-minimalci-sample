@@ -5,7 +5,7 @@ parameters:
   # Optional: Git fetch depth
   fetchDepth: ''
 
-  # Optional: name of the phase (not specifying phase name may cause name collisions)
+  # Optional: name of the job (not specifying phase name may cause name collisions)
   name: ''
 
   # Required: A defined YAML queue

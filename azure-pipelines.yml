@@ -16,8 +16,8 @@ trigger:
 # pr:
 # - master
 
-# Three phases for each of the three OSes we want to run on
-phases:
+# Three jobs for each of the three OSes we want to run on
+jobs:
 - template: /eng/common/templates/phases/base.yml
   parameters:
     name: Windows_NT
