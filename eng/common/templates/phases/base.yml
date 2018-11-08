@@ -43,8 +43,7 @@ jobs:
       ${{ insert }}: ${{ parameters.strategy }}
   
   ${{ if ne(parameters.container, '') }}:
-    pool:
-      ${{ insert }}: ${{ parameters.container }}
+    container: ${{ parameters.container }}
 
   ${{ if ne(parameters.pool, '') }}:
     pool:
