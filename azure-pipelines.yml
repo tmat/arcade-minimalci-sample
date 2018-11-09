@@ -90,7 +90,6 @@ jobs:
           _BuildConfig: Debug
         release_configuration:
           _BuildConfig: Release
-    container: LinuxContainer
     pool:
       name: NetCorePublic-Int-Pool
       queue: Ubuntu.1604.Amd64.Open
