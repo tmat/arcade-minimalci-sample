@@ -44,7 +44,7 @@ phases:
         HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
         XUnitTargetFramework: netcoreapp2.0
-        XUnitRunnerVersion: 2.1.4
+        XUnitRunnerVersion: 2.4.1
         IncludeDotNetCli: true
         DotNetCliPackageType: sdk
         DotNetCliVersion: 2.1.403
@@ -88,7 +88,7 @@ phases:
         HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
         XUnitTargetFramework: netcoreapp2.0
-        XUnitRunnerVersion: 2.1.4
+        XUnitRunnerVersion: 2.4.1
         IncludeDotNetCli: true
         DotNetCliPackageType: sdk
         DotNetCliVersion: 2.1.403
@@ -137,7 +137,7 @@ phases:
         HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
         XUnitTargetFramework: netcoreapp2.0
-        XUnitRunnerVersion: 2.1.4
+        XUnitRunnerVersion: 2.4.1
         IncludeDotNetCli: true
         DotNetCliPackageType: sdk
         DotNetCliVersion: 2.1.403
