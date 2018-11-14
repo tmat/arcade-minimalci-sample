@@ -41,12 +41,15 @@ phases:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
         HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open
-        HelixAccessToken: $(HelixTestAccessToken)
-        CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
-        WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: "%HELIX_CORRELATION_PAYLOAD%\\dotnet xunit"
+        HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
+        XUnitProjects: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
+        XUnitTargetFramework: netcoreapp2.0
+        XUnitRunnerVersion: 2.1.4
+        IncludeDotNetCli: true
+        DotNetCliPackageType: sdk
+        DotNetCliVersion: 2.1.403
         EnableXUnitReporter: true
-        Condition: eq(variables['_BuildConfig'], 'Debug')
+        WaitForWorkItemCompletion: true
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs to VSTS
       inputs:
@@ -82,12 +85,16 @@ phases:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
         HelixTargetQueues: OSX.1012.Amd64
-        HelixAccessToken: $(HelixTestAccessToken)
-        CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
-        WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: $HELIX_CORRELATION_PAYLOAD/dotnet xunit
+        HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
+        XUnitProjects: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
+        XUnitTargetFramework: netcoreapp2.0
+        XUnitRunnerVersion: 2.1.4
+        IncludeDotNetCli: true
+        DotNetCliPackageType: sdk
+        DotNetCliVersion: 2.1.403
         EnableXUnitReporter: true
-        Condition: eq(variables['_BuildConfig'], 'Debug')
+        WaitForWorkItemCompletion: true
+        condition: eq(variables['_BuildConfig'], 'Debug')
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs to VSTS
       inputs:
@@ -127,12 +134,15 @@ phases:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
         HelixTargetQueues: Debian.9.Amd64.Open;Fedora.27.Amd64.Open;RedHat.74.Amd64.Open;Ubuntu.1604.Amd64.Open
-        HelixAccessToken: $(HelixTestAccessToken)
-        CorrelationPayloadDirectory: $(Build.SourcesDirectory)/.dotnet
-        WorkItemDirectory: $(Build.SourcesDirectory)/HelloTests
-        WorkItemCommand: $HELIX_CORRELATION_PAYLOAD/dotnet xunit
+        HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
+        XUnitProjects: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
+        XUnitTargetFramework: netcoreapp2.0
+        XUnitRunnerVersion: 2.1.4
+        IncludeDotNetCli: true
+        DotNetCliPackageType: sdk
+        DotNetCliVersion: 2.1.403
         EnableXUnitReporter: true
-        Condition: eq(variables['_BuildConfig'], 'Debug')
+        WaitForWorkItemCompletion: true
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs to VSTS
       inputs:
