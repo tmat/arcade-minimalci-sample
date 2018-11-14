@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.DotNet.Helix.Sdk">
 
   <ItemGroup>
-    <HelixCorrelationPayload Include="$(CorrelationPayload)">
+    <HelixCorrelationPayload Include="$(CorrelationPayloadDirectory)">
       <PayloadDirectory>%(Identity)</PayloadDirectory>
     </HelixCorrelationPayload>
   </ItemGroup>
 
   <ItemGroup>
-    <HelixWorkItem Include="WorkItem">
+    <HelixWorkItem Include="WorkItem" Condition="'$(WorkItemDirectory)' != ''">
       <PayloadDirectory>$(WorkItemDirectory)</PayloadDirectory>
       <Command>$(WorkItemCommand)</Command>
     </HelixWorkItem>

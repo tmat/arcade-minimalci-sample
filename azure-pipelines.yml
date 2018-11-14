@@ -1,22 +1,24 @@
 variables:
   Build.Repository.Clean: true
-  targetFramework: netcoreapp2.0
   _HelixType: build/product
   _HelixSource: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
   _HelixTestType: test/product
+resources:
+  containers:
+  - container: LinuxContainer
+    image: microsoft/dotnet-buildtools-prereqs:ubuntu-14.04-cross-0cd4667-20170319080304
 
+# CI and PR triggers
 trigger:
 - master
-
-# To be added in the future when VSTS supports this feature
-# pr:
-# - master
+- switch-to-test-pool
+pr:
+- master
 
 # Three phases for each of the three OSes we want to run on
 phases:
 - template: /eng/common/templates/phases/base.yml
   parameters:
-    agentOs: Windows_NT
     name: Windows_NT
     enableTelemetry: true
     queue:
@@ -45,12 +47,19 @@ phases:
         WorkItemCommand: "%HELIX_CORRELATION_PAYLOAD%\\dotnet xunit"
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Logs to VSTS
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)'
+        PublishLocation: Container
+        ArtifactName: $(Agent.Os)_$(Agent.JobName)
+      continueOnError: true
+      condition: always()
     variables:
       _HelixBuildConfig: $(_BuildConfig)
 
 - template: /eng/common/templates/phases/base.yml
   parameters:
-    agentOs: OSX
     name: OSX
     enableTelemetry: true
     queue:
@@ -79,17 +88,25 @@ phases:
         WorkItemCommand: $HELIX_CORRELATION_PAYLOAD/dotnet xunit
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Logs to VSTS
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)'
+        PublishLocation: Container
+        ArtifactName: $(Agent.Os)_$(Agent.JobName)
+      continueOnError: true
+      condition: always()
     variables:
       _HelixBuildConfig: $(_BuildConfig)
 
 - template: /eng/common/templates/phases/base.yml
   parameters:
-    agentOs: Linux
     name: Linux
     enableTelemetry: true
     queue:
-      name: dnceng-linux-external-temp
+      name: Hosted Ubuntu 1604
       parallel: 99
+      container: LinuxContainer
       matrix:
         debug_configuration:
           _BuildConfig: Debug
@@ -116,7 +133,13 @@ phases:
         WorkItemCommand: $HELIX_CORRELATION_PAYLOAD/dotnet xunit
         EnableXUnitReporter: true
         Condition: eq(variables['_BuildConfig'], 'Debug')
+    - task: PublishBuildArtifacts@1
+      displayName: Publish Logs to VSTS
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)'
+        PublishLocation: Container
+        ArtifactName: $(Agent.Os)_$(Agent.JobName)
+      continueOnError: true
+      condition: always()
     variables:
       _HelixBuildConfig: $(_BuildConfig)
-      # Run build in docker container
-      _PREVIEW_VSTS_DOCKER_IMAGE: microsoft/dotnet-buildtools-prereqs:ubuntu-14.04-cross-0cd4667-20170319080304
