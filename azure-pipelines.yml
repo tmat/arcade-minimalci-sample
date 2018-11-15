@@ -50,6 +50,7 @@ phases:
         DotNetCliVersion: 2.1.403
         EnableXUnitReporter: true
         WaitForWorkItemCompletion: true
+        condition: eq(variables['_BuildConfig'], 'Debug')
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs to VSTS
       inputs:
@@ -143,6 +144,7 @@ phases:
         DotNetCliVersion: 2.1.403
         EnableXUnitReporter: true
         WaitForWorkItemCompletion: true
+        condition: eq(variables['_BuildConfig'], 'Debug')
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs to VSTS
       inputs:
