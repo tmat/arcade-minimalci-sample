@@ -85,7 +85,7 @@ phases:
       parameters:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
-        HelixTargetQueues: OSX.1012.Amd64
+        HelixTargetQueues: OSX.1012.Amd64;OSX.1013.Amd64
         HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
         XUnitTargetFramework: netcoreapp2.0
