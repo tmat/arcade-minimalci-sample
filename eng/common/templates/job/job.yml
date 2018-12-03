@@ -20,7 +20,7 @@ parameters:
 
   timeoutInMinutes: ''
 
-  variables: ''
+  variables: []
 
   workspace: ''
 
@@ -43,8 +43,8 @@ parameters:
   # Optional: enable sending telemetry
   #           if 'true', these "variables" must be specified in the variables object or as part of the queue matrix
   #             _HelixBuildConfig - differentiate between Debug, Release, other
-  #             _HelixSource - Example: build/product
-  #             _HelixType - Example: official/dotnet/arcade/$(Build.SourceBranch)
+  #             _HelixType - Example: build/product/
+  #             _HelixSource - Example: official/dotnet/arcade/$(Build.SourceBranch)
   enableTelemetry: false
 
   # Optional: If specified, then automatically derive "_HelixSource" variable for telemetry
@@ -93,25 +93,24 @@ jobs:
   ${{ if ne(parameters.timeoutInMinutes, '') }}:
     timeoutInMinutes: ${{ parameters.timeoutInMinutes }}
 
-  ${{ if ne(parameters.variables, '') }}:
-    variables:
-    - ${{ each variable in parameters.variables }}:
-      - ${{ if ne(variable.name, '') }}:
-        - name: ${{ variable.name }}
-          value: ${{ variable.value }}
-      - ${{ if ne(variable.group, '') }}:
-        - group: ${{ variable.group }}
-    # Add additional variables
-    - ${{ if and(ne(parameters.helixRepo, ''), eq(parameters.runAsPublic, 'false'), ne(variables['System.TeamProject'], 'public'), notIn(variables['Build.Reason'], 'PullRequest')) }}:
-      - name: _HelixSource
-        value: official/${{ parameters.helixRepo }}/$(Build.SourceBranch)
-    - ${{ if and(ne(parameters.helixRepo, ''), or(ne(parameters.runAsPublic, 'false'), eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest'))) }}:
-      - name: _HelixSource
-        value: pr/${{ parameters.helixRepo }}/$(Build.SourceBranch)
-    - name: _HelixType
-      value: ${{ parameters.helixType }}
-    - name: _HelixBuildConfig
-      value: $(_BuildConfig)
+  variables:
+  - ${{ each variable in parameters.variables }}:
+    - ${{ if ne(variable.name, '') }}:
+      - name: ${{ variable.name }}
+        value: ${{ variable.value }}
+    - ${{ if ne(variable.group, '') }}:
+      - group: ${{ variable.group }}
+  # Add additional variables
+  - ${{ if and(ne(parameters.helixRepo, ''), eq(parameters.runAsPublic, 'false'), ne(variables['System.TeamProject'], 'public'), notIn(variables['Build.Reason'], 'PullRequest')) }}:
+    - name: _HelixSource
+      value: official/${{ parameters.helixRepo }}/$(Build.SourceBranch)
+  - ${{ if and(ne(parameters.helixRepo, ''), or(ne(parameters.runAsPublic, 'false'), eq(variables['System.TeamProject'], 'public'), in(variables['Build.Reason'], 'PullRequest'))) }}:
+    - name: _HelixSource
+      value: pr/${{ parameters.helixRepo }}/$(Build.SourceBranch)
+  - name: _HelixType
+    value: ${{ parameters.helixType }}
+  - name: _HelixBuildConfig
+    value: $(_BuildConfig)
 
   ${{ if ne(parameters.workspace, '') }}:
     workspace: ${{ parameters.workspace }}
@@ -152,9 +151,6 @@ jobs:
 
   - ${{ if eq(parameters.enableTelemetry, 'true') }}:
     - template: /eng/common/templates/steps/telemetry-end.yml
-      parameters:
-        helixSource: $(_HelixSource)
-        helixType: $(_HelixType)
 
   - ${{ if eq(parameters.enablePublishBuildArtifacts, 'true') }}:
     - task: PublishBuildArtifacts@1
