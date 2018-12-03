@@ -2,7 +2,7 @@ variables:
   Build.Repository.Clean: true
   _HelixType: build/product
   _HelixSource: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
-  _HelixTestType: test/product
+  _HelixTestType: test/product/
   _XUnitProject: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
   _XUnitTargetFramework: netcoreapp2.0
   _XUnitRunnerVersion: 2.4.1
@@ -126,9 +126,6 @@ phases:
         release_configuration:
           _BuildConfig: Release
     steps:
-    - task: DotNetCoreInstaller@0
-      inputs:
-        version: 2.1.401
     - script: eng/common/cibuild.sh
         --configuration $(_BuildConfig)
         --prepareMachine
