@@ -27,9 +27,10 @@ steps:
   - script: chmod +x eng/common/tools.sh; scriptroot="$BUILD_SOURCEDIRECTORY/eng"; source eng/common/tools.sh
     displayName: Install tools (Unix)
     condition: and(${{ parameters.condition }}, ne(variables['Agent.Os'], 'Windows_NT'))
-  - script: .dotnet\dotnet msbuild eng\common\helixpublish.proj /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\SendToHelix.binlog
+  - script: .dotnet\dotnet msbuild eng\common\helixpublish.proj /bl:%BUILD_SOURCESDIRECTORY%\artifacts\log\%BuildConfig%\SendToHelix.binlog
     displayName: Send job to Helix (Windows)
     env:
+      BuildConfig: $(_BuildConfig)
       HelixSource: ${{ parameters.HelixSource }}
       HelixType: ${{ parameters.HelixType }}
       HelixBuild: ${{ parameters.HelixBuild }}
@@ -50,9 +51,10 @@ steps:
       WaitForWorkItemCompletion: ${{ parameters.WaitForWorkItemCompletion }}
     condition: and(${{ parameters.condition }}, eq(variables['Agent.Os'], 'Windows_NT'))
     continueOnError: ${{ parameters.continueOnError }}
-  - script: .dotnet/dotnet msbuild eng/common/helixpublish.proj /bl:$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)/SendToHelix.binlog
+  - script: .dotnet/dotnet msbuild eng/common/helixpublish.proj /bl:$BUILD_SOURCESDIRECTORY/artifacts/log/$BuildConfig/SendToHelix.binlog
     displayName: Send job to Helix (Unix)
     env:
+      BuildConfig: $(_BuildConfig)
       HelixSource: ${{ parameters.HelixSource }}
       HelixType: ${{ parameters.HelixType }}
       HelixBuild: ${{ parameters.HelixBuild }}
