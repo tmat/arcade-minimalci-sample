@@ -23,10 +23,16 @@ parameters:
 
 steps:
   - script: 'echo ##vso[task.prependpath]%DotnetPath%'
+    displayName: Prepend dotnet to path
     condition: and(succeeded(), eq(variables['Agent.Os'], 'Windows_NT'))
     env:
       DotnetPath: $(DotnetPath)
-  - script: 'echo ##vso[task.prependpath]$DotnetPath'
+  - script: |
+      echo $DotnetPath
+      echo $PATH
+      echo ##vso[task.prependpath]$DotnetPath
+      echo $PATH
+    displayName: Prepend dotnet to path
     condition: and(succeeded(), ne(variables['Agent.Os'], 'Windows_NT'))
     env:
       DotnetPath: $(DotnetPath)
