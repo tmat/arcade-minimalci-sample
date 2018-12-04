@@ -41,7 +41,7 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - template: /eng/common/templates/steps/send-to-helix.yml
+    - template: /eng/common/templates/steps/helix-publish.yml
       parameters:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
@@ -86,7 +86,7 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - template: /eng/common/templates/steps/send-to-helix.yml
+    - template: /eng/common/templates/steps/helix-publish.yml
       parameters:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
@@ -132,7 +132,7 @@ phases:
       name: Build
       displayName: Build
       condition: succeeded()
-    - template: /eng/common/templates/steps/send-to-helix.yml
+    - template: /eng/common/templates/steps/helix-publish.yml
       parameters:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
