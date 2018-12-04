@@ -1,6 +1,6 @@
 parameters:
   HelixSource: 'pr/dotnet-github-anon-kaonashi-bot'   # required
-  HelixType: ̓'tests/default'                          # required
+  HelixType: ̓'tests/default/'                          # required
   HelixBuild: $(Build.BuildNumber)                    # required
   HelixTargetQueues: ''                               # required
   HelixAccessToken: ''                                # required
@@ -24,7 +24,7 @@ steps:
   - script: powershell eng/common/tools.ps1
     displayName: Install tools (Windows)
     condition: and(${{ parameters.condition }}, eq(variables['Agent.Os'], 'Windows_NT'))
-  - script: chmod +x eng/common/tools.sh; scriptroot="$BUILD_SOURCEDIRECTORY/eng"; source eng/common/tools.sh
+  - script: scriptroot="$BUILD_SOURCEDIRECTORY/eng"; source eng/common/tools.sh
     displayName: Install tools (Unix)
     condition: and(${{ parameters.condition }}, ne(variables['Agent.Os'], 'Windows_NT'))
   - script: .dotnet\dotnet msbuild %BUILD_SOURCESDIRECTORY%\eng\common\helixpublish.proj /bl:%BUILD_SOURCESDIRECTORY%\artifacts\log\%BuildConfig%\SendToHelix.binlog

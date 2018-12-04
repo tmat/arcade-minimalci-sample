@@ -7,7 +7,7 @@ variables:
     value: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
   - name: _HelixTestType
     value: test/product/
-  - name: _XUnitProjec
+  - name: _XUnitProject
     value: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
   - name: _XUnitTargetFramework
     value: netcoreapp2.0
