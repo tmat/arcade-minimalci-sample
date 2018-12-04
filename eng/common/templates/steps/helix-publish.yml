@@ -17,10 +17,19 @@ parameters:
   DotNetCliVersion: ''
   EnableXUnitReporter: false
   WaitForWorkItemCompletion: true
+  DotnetPath: $(BuildSourcesDirectory)/.dotnet
   condition: succeeded()
   continueOnError: false
 
 steps:
+  - script: 'echo ##vso[task.prependpath]%DotnetPath%'
+    condition: and(succeeded(), eq(variables['Agent.Os'], 'Windows_NT'))
+    env:
+      DotnetPath: $(DotnetPath)
+  - script: 'echo ##vso[task.prependpath]$DotnetPath'
+    condition: and(succeeded(), ne(variables['Agent.Os'], 'Windows_NT'))
+    env:
+      DotnetPath: $(DotnetPath)
   - task: DotNetCoreCLI@2
     inputs:
       command: custom
