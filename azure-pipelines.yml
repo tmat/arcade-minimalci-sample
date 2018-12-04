@@ -1,14 +1,23 @@
 variables:
-  Build.Repository.Clean: true
-  _HelixType: build/product
-  _HelixSource: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
-  _HelixTestType: test/product/
-  _XUnitProject: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
-  _XUnitTargetFramework: netcoreapp2.0
-  _XUnitRunnerVersion: 2.4.1
-  _DotNetCliPackageType: sdk
-  _DotNetCliVersion: 2.1.403
-  
+  - name: Build.Repository.Clean
+    value: true
+  - name: _HelixType
+    value: build/product
+  - name: _HelixSource
+    value: pr/dotnet/arcade-minimalci-sample/$(Build.SourceBranch)
+  - name: _HelixTestType
+    value: test/product/
+  - name: _XUnitProjec
+    value: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
+  - name: _XUnitTargetFramework
+    value: netcoreapp2.0
+  - name: _XUnitRunnerVersion
+    value: 2.4.1
+  - name: _DotNetCliPackageType
+    value: sdk
+  - name: _DotNetCliVersion
+    value: 2.1.403
+
 resources:
   containers:
   - container: LinuxContainer
