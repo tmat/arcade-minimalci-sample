@@ -1,9 +1,9 @@
 parameters:
-  HelixSource: 'pr/dotnet-github-anon-kaonashi-bot'
-  HelixType: ̓'tests/default'
-  HelixBuild: $(Build.BuildNumber)
-  HelixTargetQueues: ''
-  HelixAccessToken: ''
+  HelixSource: 'pr/dotnet-github-anon-kaonashi-bot'   # required
+  HelixType: ̓'tests/default'                          # required
+  HelixBuild: $(Build.BuildNumber)                    # required
+  HelixTargetQueues: ''                               # required
+  HelixAccessToken: ''                                # required
   HelixPreCommands: ''
   HelixPostCommands: ''
   WorkItemDirectory: ''
@@ -21,12 +21,7 @@ parameters:
   continueOnError: false
 
 steps:
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: custom
-      projects: eng/common/helixpublish.proj
-      custom: msbuild
-      arguments: '/bl:$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)/SendToHelix.binlog'
+  - script: .dotnet/dotnet eng/common/helixpublish.proj /bl:$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)/SendToHelix.binlog
     displayName: Send job to Helix
     env:
       HelixSource: ${{ parameters.HelixSource }}
