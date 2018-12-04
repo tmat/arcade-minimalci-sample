@@ -17,7 +17,7 @@ parameters:
   DotNetCliVersion: ''
   EnableXUnitReporter: false
   WaitForWorkItemCompletion: true
-  DotnetPath: $(BuildSourcesDirectory)/.dotnet
+  DotnetPath: $(Build.SourcesDirectory)/.dotnet
   condition: succeeded()
   continueOnError: false
 
