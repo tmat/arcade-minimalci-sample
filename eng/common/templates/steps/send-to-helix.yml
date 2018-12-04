@@ -21,6 +21,12 @@ parameters:
   continueOnError: false
 
 steps:
+  - script: powershell eng/common/tools.ps1
+    displayName: Install tools (Windows)
+    condition: and(succeeded(), eq(variables['Agent.Os'], 'Windows_NT'))
+  - script: eng/common/tools.sh
+    displayName: Install tools (Unix)
+    condition: and(succeeded(), ne(variables['Agent.Os'], 'Windows_NT'))
   - script: .dotnet/dotnet eng/common/helixpublish.proj /bl:$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)/SendToHelix.binlog
     displayName: Send job to Helix
     env:
