@@ -1,9 +1,9 @@
 parameters:
-  HelixSource: 'pr/dotnet-github-anon-kaonashi-bot'     # required
-  HelixType: ̓'tests/default/'                           # required
-  HelixBuild: $(Build.BuildNumber)                      # required
-  HelixTargetQueues: ''                                 # required
-  HelixAccessToken: ''                                  # required
+  HelixSource: 'pr/default'          # required
+  HelixType: ̓'tests/default/'        # required
+  HelixBuild: $(Build.BuildNumber)   # required
+  HelixTargetQueues: ''              # required
+  HelixAccessToken: ''               # required
   HelixPreCommands: ''
   HelixPostCommands: ''
   WorkItemDirectory: ''
