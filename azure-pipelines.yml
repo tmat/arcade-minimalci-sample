@@ -17,6 +17,7 @@ variables:
     value: sdk
   - name: _DotNetCliVersion
     value: 2.1.403
+  - group: Helix Anonymous
 
 resources:
   containers:
