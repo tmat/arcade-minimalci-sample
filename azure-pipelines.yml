@@ -58,7 +58,7 @@ jobs:
       parameters:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
-        HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open
+        HelixTargetQueues: Windows.10.Amd64.Open;Windows.81.Amd64.Open;Windows.7.Amd64.Open
         HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(_XUnitProject)
         XUnitTargetFramework: $(_XUnitTargetFramework)
