@@ -68,6 +68,8 @@ jobs:
         DotNetCliVersion: $(_DotNetCliVersion)
         EnableXUnitReporter: true
         WaitForWorkItemCompletion: true
+        IsExternal: true
+        Creator: arcade-minimalci-sample
         condition: eq(variables['_BuildConfig'], 'Debug')
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs to VSTS
@@ -116,6 +118,8 @@ jobs:
         DotNetCliVersion: $(_DotNetCliVersion)
         EnableXUnitReporter: true
         WaitForWorkItemCompletion: true
+        IsExternal: true
+        Creator: arcade-minimalci-sample
         condition: eq(variables['_BuildConfig'], 'Debug')
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs to VSTS
@@ -164,6 +168,8 @@ jobs:
         DotNetCliVersion: $(_DotNetCliVersion)
         EnableXUnitReporter: true
         WaitForWorkItemCompletion: true
+        IsExternal: true
+        Creator: arcade-minimalci-sample
         condition: eq(variables['_BuildConfig'], 'Debug')
     - task: PublishBuildArtifacts@1
       displayName: Publish Logs to VSTS
