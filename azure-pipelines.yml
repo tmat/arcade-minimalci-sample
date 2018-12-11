@@ -61,7 +61,8 @@ jobs:
         HelixTargetQueues: Windows.10.Amd64.Open;Windows.81.Amd64.Open;Windows.7.Amd64.Open
         HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(_XUnitProject)
-        XUnitTargetFramework: $(_XUnitTargetFramework)
+        XUnitPublishTargetFramework: $(_XUnitTargetFramework)
+        XUnitRuntimeTargetFramework: $(_XUnitTargetFramework)
         XUnitRunnerVersion: $(_XUnitRunnerVersion)
         IncludeDotNetCli: true
         DotNetCliPackageType: $(_DotNetCliPackageType)
@@ -111,7 +112,8 @@ jobs:
         HelixTargetQueues: OSX.1012.Amd64;OSX.1013.Amd64
         HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(_XUnitProject)
-        XUnitTargetFramework: $(_XUnitTargetFramework)
+        XUnitPublishTargetFramework: $(_XUnitTargetFramework)
+        XUnitRuntimeTargetFramework: $(_XUnitTargetFramework)
         XUnitRunnerVersion: $(_XUnitRunnerVersion)
         IncludeDotNetCli: true
         DotNetCliPackageType: $(_DotNetCliPackageType)
@@ -161,7 +163,8 @@ jobs:
         HelixTargetQueues: Debian.9.Amd64.Open;Fedora.27.Amd64.Open;RedHat.7.Amd64.Open;Ubuntu.1604.Amd64.Open
         HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(_XUnitProject)
-        XUnitTargetFramework: $(_XUnitTargetFramework)
+        XUnitPublishTargetFramework: $(_XUnitTargetFramework)
+        XUnitRuntimeTargetFramework: $(_XUnitTargetFramework)
         XUnitRunnerVersion: $(_XUnitRunnerVersion)
         IncludeDotNetCli: true
         DotNetCliPackageType: $(_DotNetCliPackageType)
