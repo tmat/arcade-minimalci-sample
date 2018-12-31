@@ -59,7 +59,6 @@ jobs:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
         HelixTargetQueues: Windows.10.Amd64.Open;Windows.81.Amd64.Open;Windows.7.Amd64.Open
-        HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(_XUnitProject)
         XUnitPublishTargetFramework: $(_XUnitTargetFramework)
         XUnitRuntimeTargetFramework: $(_XUnitTargetFramework)
@@ -109,8 +108,7 @@ jobs:
       parameters:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
-        HelixTargetQueues: OSX.1012.Amd64;OSX.1013.Amd64
-        HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
+        HelixTargetQueues: OSX.1012.Amd64.Open;OSX.1013.Amd64.Open
         XUnitProjects: $(_XUnitProject)
         XUnitPublishTargetFramework: $(_XUnitTargetFramework)
         XUnitRuntimeTargetFramework: $(_XUnitTargetFramework)
@@ -161,7 +159,6 @@ jobs:
         HelixSource: $(_HelixSource)
         HelixType: $(_HelixTestType)
         HelixTargetQueues: Debian.9.Amd64.Open;Fedora.27.Amd64.Open;RedHat.7.Amd64.Open;Ubuntu.1604.Amd64.Open
-        HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
         XUnitProjects: $(_XUnitProject)
         XUnitPublishTargetFramework: $(_XUnitTargetFramework)
         XUnitRuntimeTargetFramework: $(_XUnitTargetFramework)
