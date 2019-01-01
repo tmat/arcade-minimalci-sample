@@ -148,13 +148,6 @@ Arcade integrates with Helix, making it easy to do cross-platform testing at sca
 }
 ```
 
-Then, in your [`azure-pipelines.yml`](azure-pipelines.yml) file, add a reference to the **Helix Anonymous** variable group to the variables section:
-
-```yaml
-variables:
-  - group: Helix Anonymous
-```
-
 Finally, reference the `send-to-helix.yml` template after your build step. Make sure to do it for each phase.
 
 ```yaml
@@ -176,7 +169,6 @@ variables:
     value: sdk
   - name: _DotNetCliVersion # the version of the dotnet cli you want to bootstrap (probably the same as the one in your global.json!)
     value: 2.1.403
-  - group: Helix Anonymous
 # ...
 # steps:
 # build step here
@@ -185,7 +177,6 @@ variables:
     HelixSource: $(_HelixSource)
     HelixType: $(_HelixTestType)
     HelixTargetQueues: Windows.10.Amd64.Open;Windows.7.Amd64.Open  # set queues appropriately for the machine you're building on
-    HelixAccessToken: $(BotAccount-dotnet-github-anon-kaonashi-bot-helix-token)
     XUnitProjects: $(Build.SourcesDirectory)/HelloTests/HelloTests.csproj
     XUnitTargetFramework: $(_XUnitTargetFramework)
     XUnitRunnerVersion: $(_XUnitRunnerVersion)
