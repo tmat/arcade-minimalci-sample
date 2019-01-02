@@ -8,7 +8,7 @@ namespace HelloTests
         [Fact]
         public void SuccessfulTest()
         {
-            Console.WriteLine("Success!");
+            Assert.True(true);
         }
     }
 }
